@@ -1,0 +1,38 @@
+@charset "UTF-8";
+#mainbody{
+	width: 1000px;
+	height: auto;
+	margin: auto;
+}
+
+.spacebox{
+	float:left;
+	width:250px;
+	height: 300px;
+	text-align: center;
+}
+
+.spaceboximg{
+	width: 200px;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.imgInsertBox{
+	
+	height:100px;
+	margin:100px auto 50px auto;
+	text-align: center;
+}
+
+.outline-primary:hover{
+	color: #fff;
+    background-color: #E95420;
+    border-color: #E95420;
+}
+
+.outline-primary{
+	color: #E95420;
+    border-color: #E95420;
+}

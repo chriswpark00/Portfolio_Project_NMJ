@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+#profileImg {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#profileImg > img {
+    height: 400px;
+    width: 90%;
+}
+
+.reserveSubmit {
+    text-align: center;
+}
+
+.btn-primary {
+        width: 200px;
+    border-radius: 5px;
+}
+
+.mapContainer {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 80px;
+}
+
+
+
+#menu, #room {
+	color: red;
+	cursor: pointer;
+}
+
+.modalContainer {
+	text-align: center;
+	display: none;
+}
+
+@media only screen and (min-width: 1200px) {
+	.modalContainer {
+		margin: 0px 10%;
+	}
+}
+
+.menuPic {
+	width : 80%;
+	height: 200px;
+	margin: 0px auto;
+	margin-bottom: 15px;
+	
+}
+
+#likebutton{
+	
+	width:70px;
+	height:50px;
+	display:inline;
+	float:right;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.dislikebtn{
+	width:70px;
+	height:50px;
+	display:inline;
+	float:right;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#storeInfomation{
+	font-size: 30px;
+	margin: 0px 0px 20px 0px;
+}
+
+.menuPic img {
+	width: 100%;
+	height: 200px;
+}
+
+
+
+
+
+
+
+

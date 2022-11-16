@@ -1,0 +1,288 @@
+@charset "UTF-8";
+
+
+.topBox{
+	overflow: hidden;
+    width: 1230px;
+    margin: 0 auto;
+}
+
+#leftArea{
+	width: 900px;
+	margin: 0px 30px 0px 0px;
+	float: left;
+}
+
+#rightArea{
+	width: 300px;
+	float: left;
+}
+#draggArea{
+	width: 900px;
+	height: 687px;
+	display: inline-block;
+	border:1px solid #ddd;
+}
+
+
+#boxMake{
+	height: 687px;
+	width: 300px;
+	display: inline-block;
+	float: left;
+}
+
+#boxMakingArea{
+	height: 400px;
+	width: 300px;
+	background-color: #F7F7F7;
+}
+
+#boxListArea{
+	text-align: center;
+	overflow-y:auto;
+	
+	height: 20px;
+	width: 100%;
+	color:black;
+}
+
+.card-header{
+	color: black;
+	text-align: center;
+}
+
+#addButton{
+	background-color: #E95420;
+}
+
+.bigbutton{
+	width:300px;
+	height: 80px;
+	background-color: #f0ad4e !important;
+}
+
+.draggablepc {
+	height: 70px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.draggablebil {
+	width: 270px;
+	height: 170px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.draggablekar {
+	width: 200px;
+	height: 220px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.draggablebowl {
+	width: 100px;
+	height: 420px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.draggableTable{
+	width: 150px;
+	height: 170px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.draggableRoom{
+	width:100px;
+	height: 120px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	text-align: center;
+}
+
+.pcspace{
+	width:50px;
+	height: 70px;
+	padding: 0;
+	margin: 0;
+	
+	
+}
+.pcspaceimg {
+	width: 50px;
+	height: 50px;
+	padding: 0;
+	margin: 0;
+	
+	background-image: url("../img/space/spacepc.jpeg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.pcNum{
+	width: 50px;
+	height: 20px;
+	font-size: 10px;
+}
+
+.karspaceimg{
+	width: 200px;
+	height: 200px;
+	background-image: url("../img/space/spacekaraoke.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.bilspaceimg{
+	width:270px;
+	height: 150px;
+	background-image: url("../img/space/spacebiliard.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.bowlspaceimg{
+	width: 100px;
+	height: 400px;
+	background-image: url("../img/space/spacebowling.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.tablespaceimg{
+	width: 150px;
+	height: 150px;
+	background-image: url("../img/space/spacetable.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.roomspaceimg{
+	width: 100px;
+	height: 100px;
+	background-image: url("../img/space/spaceroom.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.spaceEmpty0{
+	opacity: 1;
+}
+
+.spaceEmpty1{
+	opacity: 0.2;
+}
+
+#reservationArea{
+	width: 100%;
+	margin: 30px auto;
+	max-width: 1230px;
+}
+
+#reservationtb{
+	width: 100%;
+	background: none;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+#reservationtb th, #reservationtb td{
+	text-align: center;
+	padding: 10px;
+	font-size: 1em;
+}
+
+#tHead{
+	border-top:4px solid #eee;
+	border-bottom:4px solid #eee;
+}
+.tData{
+	border-bottom:1px solid #eee;
+}
+
+.tData td:nth-child(2){
+	text-align: left !important;
+}
+#spaceImgArea{
+	width: 300px;
+	background-color: #732850;
+}
+
+#mySpaceImg{
+	width: 100%;
+	border: 1px solid #f0ad4e;
+	max-width: 1230px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+#selectable .ui-selecting {
+	background: #FECA40;
+}
+
+#selectable .ui-selected {
+	background: #F39814;
+}
+
+#selectable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;
+}
+
+#selectable li {
+	margin: 0px 10%;
+	height: 41px !important;
+    font-size: 1em;
+    height: 30px;
+    float: left;
+    width: 80%;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+#selectable li a{
+	color: black;
+}
+#select-result{
+	font-size:11px;
+	color: black;
+}
+
+#imgAllInsert{
+	margin-left:10%;
+	width: 200px;
+	background-color: #E95420;
+}
+
+.storeImgDetailbtn{
+	float:right;
+}
+
+.card-title span{
+	color:white;
+}
+
+.spaceDelete{
+	float:right;
+}
+
+#confirmbtn{
+	background-color: #f0ad4e;
+	border: 1px solid #f0ad4e;
+}

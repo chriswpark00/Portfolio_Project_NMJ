@@ -1,0 +1,412 @@
+@charset "UTF-8";
+
+<!-- 글씨색 : #333(버튼 글씨색은 #555), 테두리색 : 0.7px #aaa, 배경색 : #eee -->
+
+.clear{
+	clear:both;
+}
+
+.div-relative{
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+.title{
+	font-size: 50px;
+}
+so
+.subtitle{
+	font-size: 17px;
+}
+
+.myBtn{
+	font-size: 20px;
+}
+
+.myInput{
+	font-size: 17px;
+	display: inline-block;
+	
+}
+
+#terms_container{
+	width: 50%;
+	height: auto;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#terms_1{
+	height: auto;
+}
+
+#terms_2{
+	margin-top: 30px;
+	height: auto;
+}
+
+.terms_textarea{
+	width: 150px;
+	text-align: left;
+}
+
+.terms_label{
+	margin-top: 10px;
+}
+
+#tems_btn_container{
+	text-align: center;
+	width: 100%;
+	height: 150px;
+}
+
+.terms_btn{
+	font-size: 20px;
+	width: 120px;
+	height: 60px;
+	margin: 30px auto;
+}
+
+#terms_btn_right{
+	background-color: white;
+	color: #555;
+	border: 0.7px solid black;
+}
+
+#signUp_frm_container{
+	width: 35%;
+	height: auto;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	background-color: #eee;
+}
+
+.signUp_input_container{
+	margin: 5px auto;
+	board: 0.7px solid #aaa;
+}
+
+.signUp_input_container input{
+	width: 100%;
+	height: 55px;
+	padding: 10px;
+	font-size: 15px;
+}
+
+#myPage_btn_container{
+	position: absolute;
+	width: 1000px;
+	height: 350px;
+	top: 50%;
+	left: 50%; 
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.myPage_btn{
+	width: 250px;
+	height: 250px;
+	font-weight: bold;
+	font-size: 20px;
+	color: #333;
+	text-align: center;
+	background-color: white;
+	border: 0.7px solid #aaa;
+	border-radius: 15px;
+}
+
+.myPage_btn:hover {
+	background-color: red;
+	opacity: 0.6;
+	color: white;
+}
+
+#update_frm_container{
+	width: 1000px;
+	height: auto;
+	margin: 0px auto;
+	text-align: center;
+}
+
+
+#update_info_container, #update_info_container1, #update_info_container2, #update_info_container3, #update_info_container4, #update_info_container5, #update_info_container6, #update_info_container7{
+	display: inline-block;
+	width: 700px;
+	height: 70px;
+	font-size: 17px;
+	color: #333;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+.update_info{
+	width: 300px;
+	color: #555;
+	font-size : 12px;
+	margin-left: 60px;
+	border-radius: 10px;
+	border: 0.7px solid #ced4da;
+	padding: 0px 10px;
+}
+
+#update_info_file{
+	display: inline;
+	padding: 3px;
+	border: none;
+}
+
+#find_frm_container{
+	width: 1000px;
+	height: auto;
+	margin: 0px auto;
+	text-align: center;
+	font-weight: 600;
+}
+
+#find_id_frm, #find_pw_frm{
+	overflow: hidden;
+}
+
+.find_info_container{
+	width: 300px;
+	height: auto;
+	margin: 0px auto;
+}
+
+.find_info{
+	width: 250px;
+	border-radius: 10px;
+	border: 0.7px solid #aaa;
+	margin: 0px auto;
+}
+
+.find_btn{
+	padding: 10px;
+	font-weight: ;
+	font-size: 15px;
+	color: #555;
+	text-align: center;
+	background-color: white;
+	border: 0.7px solid #aaa;
+	border-radius: 5px;
+	margin-top: 30px;
+}
+
+.findOk_container{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin: 100px auto;
+}
+
+.login_btn{
+	padding: 10px;
+	font-weight: ;
+	font-size: 15px;
+	color: #555;
+	text-align: center;
+	background-color: white;
+	border: 0.7px solid #aaa;
+	border-radius: 5px;
+}
+
+.findOk_content{
+	font-size: 17px;
+}	
+
+.show_list_container{
+	width: 70%;
+	margin: 0px auto;
+}
+
+.show_list_container table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.show_list_container table th{
+	text-align: center;
+}
+
+.show_list_container th, .show_list_container td{
+	height: 50px;
+	font-size: 14px;
+	padding: 10px;
+	color: #555;
+    padding: 1em;
+    background: #eee;
+    border-left: 2px solid white; 
+    border-right: 2px solid white; 
+    border-top: 2px solid white; 
+    border-bottom: 2px solid white; 
+    white-space: nowrap;
+}
+
+.write_container{
+	width: 50%;
+	margin: 0px auto;
+}
+
+#write_frm_container{
+	position: absolute;
+	width: 1000px;
+	height: 1000px;
+	top: 50%;
+	left: 50%; 
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+#star_grade a{
+    text-decoration: none;
+    color: gray;
+}
+
+#star_grade a.on{
+    color: red;
+}
+
+#reserve_frm_container{
+	width: 80%;
+	margin: 50px auto;
+}
+
+#reserve_frm_container table{
+	border-collapse: collapse;
+  	border-radius: 1em;
+}
+
+#reserve_frm_container th{
+	text-align: left;
+}
+
+#reserve_frm_container th, #reserve_frm_container td{
+	height: 80px;
+	font-size: 20px;
+	color: #333;
+    padding: 1em;
+}
+
+.reserve_info{
+	width: 200px;
+	padding: 0px 10px;
+}
+
+#spaceArea{
+	width: 900px;
+	height: 687px;
+	border: 1px solid #ddd;
+	float: left;
+	margin : 0;
+}
+
+.spaceEmpty0{
+	opacity: 1;
+}
+
+.spaceEmpty1{
+	opacity: 0.15;
+	background-color: white;
+}
+
+.spaceIsEmpty1{
+	opacity:0.2;
+}
+#resultBox{
+	width: 250px;
+	height: 687px;
+	background-color: #EEEEEE;
+	float:left;
+	margin : 0;
+	position: relative;
+	padding:5px;
+}
+
+.selectingSeat{
+	opacity: 0.5;
+	background-color: yellow;
+}
+
+#divView {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 300px;
+	height: 300px;
+	overflow:hidden;
+	z-index: 9999;
+}
+
+.mainTextContainer {
+	text-align:left;
+	border: 1px solid #c0c0c0;
+	padding: 30px;
+}
+
+
+.replyContainer {
+	padding: 30px;
+}
+
+.replyContainer td {
+	border: 1px solid #c0c0c0;
+	border-top-left-radius: 10px;
+}
+
+.replyContainer table {
+	border-collapse: collapse;
+}
+
+/*****오다현 짬******/
+.cmTable th{
+	border:none !important;
+}
+.cmTable td{
+	background: none !important;
+	border:none !important;
+	border-bottom: 2px solid #eee !important;
+	text-align:center;
+}
+
+.tdSubject{
+	text-align:left !important;
+}
+
+.bg-pink td{
+	background: #FFF0F0 !important;
+}
+
+.money{
+	margin-top:100px;
+}
+
+.doreserv{
+	width: 100%;
+	
+}
+
+.moneyBox{
+	position: absolute;
+	bottom: 5px;
+	width: 100%;
+    max-width: 240px;
+}
+#selectedSeat{
+	color:black;
+}
+
+.doubleDate{
+	margin:0px !important;
+	width: 100%;
+}

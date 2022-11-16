@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.body .container {
+	margin-bottom: 50px;
+	background-color: #ebebeb;
+	border-radius: 20px;
+	box-shadow: 1px 1px 5px black;
+}
+
+.mapContainer, .hotPlaceContainer, .communityContainer {
+	margin-bottom: 70px;
+}
+
+.hotPlaceContainer, .communityContainer {
+	padding: 0px 3%;
+}
+
+
+table {
+	width: 100%;
+	margin: 0px auto;
+}
+
+th, td {
+	text-align: center;
+	border: 4px solid white;
+	padding: 10px;
+}
+
+td {
+	height: 80px;
+}
+
+
+
+.hotPlaceContainer tr td:nth-child(1) {width: 10%;}
+.hotPlaceContainer tr td {width: 30%;}
+.hotPlaceContainer th:hover {cursor: pointer;}
+.hotPlaceContainer td:nth-child(2):hover,
+.hotPlaceContainer td:nth-child(3):hover,
+.hotPlaceContainer td:nth-child(4):hover {
+	border-color: red;
+	background-color: white;
+}
+
+
+
+.communityContainer h2:hover {cursor: pointer;}
+.communityContainer tr td:nth-child(1) {width: 20%;}
+.communityContainer tr td:nth-child(2) {width: 40%;}
+.communityContainer tr td:nth-child(2) a:first-child {color: red;}
+.communityContainer tr td:nth-child(2) a:first-child:hover {
+	background-color: black;
+	color: white;
+	opacity: 0.5;
+}
+.communityContainer tr td:nth-child(3) {width: 30%;}
+.communityContainer tr td:nth-child(4) {width: 10%;}
+
+
+.communityContainer tr td:nth-child(2):first-child {
+	overflow-y:scroll;
+}
+
