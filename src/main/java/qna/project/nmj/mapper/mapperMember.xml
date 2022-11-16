@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.project.nmj.beans.dao.MemberDAO">
+	<!-- 회원가입 -->
+	<!-- 회원공통 -->
+	<insert id="insertMember" flushCache="true" parameterType="qna.project.nmj.beans.MemberDTO">
+		INSERT INTO NMJ_member (mb_id, mb_pw, mb_name, mb_tel, mb_email, mb_type)
+		VALUES (#{dto.mb_id}, #{dto.mb_pw}, #{dto.mb_name}, #{dto.mb_tel}, #{dto.mb_email}, #{dto.mb_type});
+	</insert>
+	<!-- 회원가입 후 정보등록 위해 매장회원 mb_uid 불러오기 -->
+	<select id="selectMb_Uid" resultType="int">
+		SELECT mb_uid
+		FROM NMJ_member
+		WHERE mb_id = #{param1};
+	</select>
+	<!-- 매장회원 정보등록 -->
+	<insert id="insertStore" flushCache="true" parameterType="qna.project.nmj.beans.StoreDTO">
+		INSERT INTO NMJ_store
+		(store_name, store_address, store_regNum, store_type, store_dtype, store_tel, store_hours, store_content, store_regImg_org, store_regImg_sav, store_img_org, store_img_sav, store_lat, store_long, mb_uid)
+		VALUES
+		(#{dto.store_name}, #{dto.store_address}, #{dto.store_regNum}, #{dto.store_type}, #{dto.store_dtype}, #{dto.store_tel}, #{dto.store_hours}, #{dto.store_content}, #{dto.store_regImg_org}, #{dto.store_regImg_sav}, #{dto.store_img_org}, #{dto.store_img_sav}, #{dto.store_lat}, #{dto.store_long}, #{dto.mb_uid});
+	</insert>
+	<!-- 매장 store_uid 불러오기 -->
+	<select id="selectStore_Uid" resultType="int">
+		SELECT store_uid
+		FROM NMJ_store
+		WHERE mb_uid = #{param1}
+		ORDER BY store_regDate DESC limit 1;
+	</select>
+	<!-- 매장정보 승인요청 -->
+	<insert id="insertRequest">
+		INSERT INTO
+			nmj_request
+			(request_type, request_content)
+		VALUES
+			(#{dto.request_type}, #{dto.request_content});
+	</insert>
+	
+	<!-- 아이디 중복검사 -->
+	<select id="checkOverId" parameterType="String" resultType="int">
+		SELECT count(*) FROM NMJ_member WHERE mb_id = #{mb_id};
+	</select>
+	<!-- 이메일 중복검사 -->
+	<select id="checkOverEmail" parameterType="String" resultType="int">
+		SELECT count(*) FROM NMJ_member WHERE mb_email = #{mb_email};
+	</select>
+	<!-- 사업자등록번호 중복검사 -->
+	<select id="checkOverRegNum" parameterType="String" resultType="int">
+		SELECT count(*) FROM NMJ_store WHERE store_regNum = #{store_regNum};
+	</select>
+	<!-- 매장전화번호 중복검사 -->
+	<select id="checkOverTel" parameterType="String" resultType="int">
+		SELECT count(*) FROM NMJ_store WHERE store_tel = #{store_tel};
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectId" resultType="qna.project.nmj.beans.MemberDTO">
+		SELECT mb_name, mb_email, mb_id
+		FROM NMJ_member
+		WHERE mb_name = #{param1}
+		AND mb_email = #{param2};
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectPw" resultType="qna.project.nmj.beans.MemberDTO">
+		SELECT mb_id, mb_name, mb_email, mb_pw
+		FROM NMJ_member
+		WHERE mb_id = #{param1}
+		AND mb_name = #{param2}
+		AND mb_email = #{param3};
+	</select>
+
+	<!-- 임시비밀번호로 업데이트 -->
+	<update id="updatePw" flushCache="true" parameterType="qna.project.nmj.beans.MemberDTO">
+		UPDATE NMJ_member SET mb_pw = #{param1}
+		WHERE mb_id = #{param2};
+	</update>
+	
+	
+	<!-- 페이지네이션 -->
+	<!-- 글 목록 전체 개수 가져오기 -->
+	<select id="selectStoreCount" resultType="int">
+		SELECT COUNT(*) FROM NMJ_store NATURAL JOIN NMJ_storeDType WHERE store_type = #{param1};
+	</select>
+	
+	
+	<!-- from 부터 row 만큼 SELECT : LIMIT 은 0 부터 시작 주의! -->
+	<!-- 매장 찾기 페이지(default) -->
+	<select id="selectStore" resultType="qna.project.nmj.beans.FindStoreDTO">
+		SELECT
+			*
+		FROM NMJ_store NATURAL JOIN NMJ_storeDType
+		WHERE store_type = #{param1} order by store_uid asc limit 0, 9;
+	</select>
+	<select id="selectStoreType" resultType="qna.project.nmj.beans.StoreTypeDTO">
+		SELECT * FROM NMJ_storeDType where store_type = #{param1};
+	</select>
+	
+	<select id="page" resultType="qna.project.nmj.beans.FindStoreDTO">
+		SELECT
+			*
+		FROM NMJ_store NATURAL JOIN NMJ_storeDType
+		WHERE store_type = #{param1} order by store_uid asc limit #{fromRow}, #{writePages};
+	</select>
+	
+	
+	
+	
+	<!-- 매장 상세페이지 -->
+	<select id="selectStoreDetail" resultType="qna.project.nmj.beans.StoreDetailDTO">
+		select 
+			*,
+			round((store_ratings / store_rateCount), 1) totalAvg
+		from nmj_store
+		where store_uid = #{param1};
+	</select>	
+	
+	<select id="StoreDetailRestSeat" resultType="qna.project.nmj.beans.StoreDetailDTO">
+		select 
+			count(space_name) count
+		from nmj_space
+		where space_empty = 0 and store_uid = #{param1};
+	</select>
+	
+	
+	<select id="selectFood" resultType="qna.project.nmj.beans.StoreDetailDTO">
+		select * from NMJ_food where store_uid = #{param1};	
+	</select>
+	
+	<select id="selectRoom" resultType="qna.project.nmj.beans.StoreDetailDTO">
+		select * from nmj_space natural join nmj_spaceimage where store_uid = #{param1}
+		order by space_name ASC;
+	</select>
+	
+	
+	<!-- 메인 페이지 -->
+	
+	<!-- 평점순 추천 가게(핫플레이스) -->
+	<select id="selectHotPlaceNol" resultType="qna.project.nmj.beans.MainDTO">
+		SELECT *,
+		round((store_ratings / store_rateCount), 1) as totalAvg
+		from NMJ_store
+		WHERE store_type = 1
+		ORDER BY round((store_ratings / store_rateCount), 1) DESC limit 3;
+	</select>
+	<select id="selectHotPlaceMuk" resultType="qna.project.nmj.beans.MainDTO">
+		SELECT *,
+		round((store_ratings / store_rateCount), 1) as totalAvg
+		from NMJ_store
+		WHERE store_type = 2
+		ORDER BY round((store_ratings / store_rateCount), 1) DESC limit 3;
+	</select>
+	<select id="selectHotPlaceJa" resultType="qna.project.nmj.beans.MainDTO">
+		SELECT *,
+		round((store_ratings / store_rateCount), 1) as totalAvg
+		from NMJ_store
+		WHERE store_type = 3
+		ORDER BY round((store_ratings / store_rateCount), 1) DESC limit 3;
+	</select>
+	
+	
+	<!-- 커뮤니티 --> <!-- 회원이름, 내용, 작성일, 조회수 (조회수 순으로 5개 출력) -->
+	<select id="selectCommunity" resultType="qna.project.nmj.beans.MainDTO">
+		SELECT * from nmj_review NATURAL JOIN nmj_member
+		ORDER BY review_viewCount DESC limit 10;
+	</select>
+	
+	
+	<select id="login" resultType="string" >
+		SELECT mb_pw from nmj_member WHERE mb_id = #{param1};	
+	</select>
+	
+	<select id="getMbUid" resultType="int">
+		SELECT mb_uid from nmj_member WHERE mb_id = #{param1};
+	</select>
+	
+	<select id="getMbType" resultType="int">
+		SELECT mb_type from nmj_member WHERE mb_id = #{param1};
+	</select>
+	
+	<select id="getStoreUid" resultType="int">
+		SELECT store_uid from nmj_store WHERE mb_uid = #{param1};
+	</select>
+	
+	<select id="getLike" resultType="qna.project.nmj.beans.LikeDTO">
+		SELECT * FROM nmj_like WHERE mb_uid = #{param1} AND store_uid = #{param2};
+	</select>
+	
+	<delete id="likeCancel">
+		delete from NMJ_like where mb_uid = #{param1} AND store_uid = #{param2};
+	</delete>
+	
+	<insert id="likeInsert">
+		insert into NMJ_like (mb_uid, store_uid) values (#{param1}, #{param2});
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+

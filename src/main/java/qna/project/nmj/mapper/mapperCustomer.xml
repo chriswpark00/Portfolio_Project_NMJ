@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.project.nmj.beans.dao.CustomerDAO">
+	
+	<!-- 마이페이지 - 회원 정보 수정 -->
+	<!-- 회원 정보 불러오기-->
+	<select id="selectMemberByUid" resultType="qna.project.nmj.beans.MemberDTO">
+		SELECT mb_img_sav, mb_tel, mb_name, mb_id, mb_email
+		FROM NMJ_member
+		WHERE mb_uid = #{mb_uid};
+	</select>
+	<!-- 회원 정보 수정(비밀번호 포함) -->
+	<update id="updateMemberByUid" flushCache="true" parameterType="qna.project.nmj.beans.MemberDTO">
+		UPDATE NMJ_member
+		SET mb_name = #{dto.mb_name}, mb_tel = #{dto.mb_tel}, mb_pw = #{dto.mb_pw},
+		mb_email = #{dto.mb_email}, mb_img_sav = #{dto.mb_img_sav}
+		WHERE mb_uid = #{dto.mb_uid};
+	</update>
+	<!-- 회원 정보 수정(비밀번호 미포함) -->
+	<update id="updateMemberByUid2" flushCache="true" parameterType="qna.project.nmj.beans.MemberDTO">
+		UPDATE NMJ_member
+		SET mb_name = #{dto.mb_name}, mb_tel = #{dto.mb_tel},
+		mb_email = #{dto.mb_email}, mb_img_sav = #{dto.mb_img_sav}
+		WHERE mb_uid = #{dto.mb_uid};
+	</update>
+	
+	<!-- 마이페이지 - 예약/찜 목록 보기 -->
+	<!-- 예약 목록 -->
+	<select id="selectReservationByUid" resultType="qna.project.nmj.beans.CusMyPageDTO">
+		SELECT n4.store_uid, n4.store_type, n4.store_name, n2.reservation_start, n2.reservation_end, n2.reservation_count, n2.reservation_price, n2.reservation_seat, n2.reservation_check
+		FROM NMJ_reservation n2, NMJ_store n4
+		WHERE #{mb_uid} = n2.mb_uid
+		AND n4.store_uid = n2.store_uid;
+	</select>
+	<!-- 찜 목록 -->
+	<select id="selectLikeByUid" resultType="qna.project.nmj.beans.CusMyPageDTO">
+		SELECT n2.store_uid, n2.store_name, n2.store_type
+		FROM NMJ_store n2, NMJ_like n3
+		WHERE #{mb_uid} = n3.mb_uid
+		AND n2.store_uid = n3.store_uid;
+	</select>
+	
+	<!-- 마이페이지 - 내 리뷰 보기 -->
+	<!-- 리뷰 목록 -->
+	<select id="selectMyReviewByUid" resultType="qna.project.nmj.beans.CusMyPageDTO">
+		<!--SELECT review_content, review_rate, review_viewCount, review_date, review_uid
+		FROM NMJ_review
+		WHERE mb_uid = #{param1};
+		-->
+		SELECT n2.review_content, n2.review_rate, n2.review_viewCount, n2.review_date, n2.review_uid, n2.store_uid
+		FROM NMJ_review n2
+		WHERE n2.mb_uid = #{param1};
+	</select>
+	<!-- 댓글 목록 -->
+	<select id="selectMyReplyByUid" resultType="qna.project.nmj.beans.CusMyPageDTO">
+		SELECT n2.reply_content, n3.review_content, n2.reply_date, n2.reply_uid, n3.store_uid, n2.review_uid
+		FROM NMJ_reply n2, NMJ_review n3
+		WHERE #{mb_uid} = n2.mb_uid
+		AND n2.review_uid = n3.review_uid;
+	</select>
+	
+	<!-- 예약페이지 -->
+	<!-- 예약 정보 예약테이블에 삽입 -->
+	<insert id="insertReservation" flushCache="true" parameterType="qna.project.nmj.beans.ReservationDTO">
+		INSERT INTO NMJ_reservation 
+		(reservation_start, reservation_end, reservation_count, reservation_price, reservation_seat, mb_uid, store_uid, space_uid )
+		VALUES (#{dto.reservation_start} , #{dto.reservation_end}, #{dto.reservation_count}, #{dto.reservation_price}, #{dto.reservation_seat}, #{dto.mb_uid}, #{dto.store_uid}, #{dto.space_uid});
+	</insert>
+	
+	<!-- 회원가입 페이지 -->
+	<insert id="insertSignUpCustomer" flushCache="true" parameterType="qna.project.nmj.beans.MemberDTO">
+		INSERT INTO NMJ_member
+		(mb_id, mb_pw, mb_name, mb_tel, mb_email)
+		VALUES (#{mb_id}, #{mb_pw}, #{mb_name}, #{mb_tel}, #{mb_email});
+	</insert>
+	
+</mapper>

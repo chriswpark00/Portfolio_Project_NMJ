@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.project.nmj.beans.dao.StoreMyPageDAO">
+	<select id="reviewSelect" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+		SELECT a.review_uid, a.mb_uid, a.store_uid, a.review_rate, a.review_content, a.review_ban, a.review_viewCount, a.review_date, b.store_type, b.store_name, c.mb_id
+		FROM NMJ_review a , NMJ_store b, NMJ_member c
+		WHERE a.store_uid = b.store_uid 
+		AND a.mb_uid = c.mb_uid
+		AND a.store_uid = #{store_uid} 
+		ORDER BY review_uid DESC
+	</select>
+	
+	
+	<select id="selectStoreByUid" resultType="qna.project.nmj.beans.StoreDTO" flushCache="true">
+		SELECT
+			store_uid,
+			mb_uid,
+			store_name,
+			store_address,
+			store_tel,
+			store_hours,
+			store_content,
+			store_img_org,
+			store_img_sav,
+			store_regNum,
+			store_regImg_org,
+			store_regImg_sav,
+			store_lat,
+			store_long,
+			store_type,
+			store_dtype,
+			store_ratings,
+			store_rateCount
+		FROM
+			nmj_store
+		WHERE
+			store_uid = #{store_uid}
+		;
+	</select>
+	<update id="updateStoreWOImageByUid" flushCache="true">
+		UPDATE
+			nmj_store
+		SET
+			store_tel = #{dto.store_tel},
+			store_hours = #{dto.store_hours},
+			store_content = #{dto.store_content}
+		WHERE
+			store_uid = #{dto.store_uid}
+		;
+	</update>
+	<update id="updateStoreWImageByUid" flushCache="true">
+		UPDATE
+			nmj_store
+		SET
+			store_tel = #{dto.store_tel},
+			store_hours = #{dto.store_hours},
+			store_content = #{dto.store_content},
+			store_img_org = #{dto.store_img_org},
+			store_img_sav = #{dto.store_img_sav}
+		WHERE
+			store_uid = #{dto.store_uid}
+		;
+	</update>
+	<select id="selectAllStoreDType" resultType="qna.project.nmj.beans.StoreTypeDTO">
+		SELECT 
+			*
+		FROM
+			nmj_storedtype
+		ORDER BY
+			store_type ASC, store_dtype ASC
+		;
+	</select>
+	<insert id="insertRequest">
+		INSERT INTO
+			nmj_request
+			(request_type, request_content)
+		VALUES
+			(#{dto.request_type}, #{dto.request_content})
+		;
+		
+		
+	</insert>
+	
+	<select id="selectFoodByStoreUid" resultType="qna.project.nmj.beans.FoodDTO">
+		SELECT
+			*
+		FROM
+			nmj_food
+		WHERE
+			store_uid = #{store_uid}
+		ORDER BY
+			food_name ASC, food_price ASC
+		;
+	</select>
+	
+	<select id="selectFoodByFoodUid" resultType="qna.project.nmj.beans.FoodDTO">
+		SELECT
+			*
+		FROM
+			nmj_food
+		WHERE
+			food_uid = #{food_uid}
+		;
+	</select>
+	
+	<update id="updateFoodByFoodUid" flushCache="true">
+		UPDATE
+			nmj_food
+		SET
+			food_price = #{dto.food_price},
+			food_name = #{dto.food_name}
+		WHERE
+			food_uid = #{dto.food_uid}
+		;
+	</update>
+	
+	<delete id="deleteFoodByFoodUid">
+		DELETE FROM
+			nmj_food
+		WHERE
+			food_uid = #{food_uid}
+		;
+	</delete>
+	<insert id="insertFoodByStoreUid">
+		INSERT INTO
+			nmj_food
+			(store_uid, food_img_org, food_img_sav, food_price, food_name)
+		VALUES
+			(#{dto.store_uid}, #{dto.food_img_org}, #{dto.food_img_sav}, #{dto.food_price}, #{dto.food_name})
+		;
+	</insert>
+	<select id="spaceListSelect" resultType="qna.project.nmj.beans.SpaceListDTO">
+		SELECT * FROM NMJ_spaceList ORDER BY spaceList_uid asc;
+			
+	</select>
+	<insert id="spaceListInsert">
+		INSERT INTO NMJ_spaceList
+		(space_type) VALUES(#{space_type});
+	
+	</insert>
+	<insert id="spaceInsert">
+	INSERT INTO NMJ_space
+	(store_uid, spaceList_uid, space_price, space_empty, space_count, space_name, space_xloc, space_yloc)
+	VALUES(#{store_uid}, #{spaceList_uid}, #{space_price}, #{space_empty}, #{space_count}, #{space_name}, #{space_xloc}, #{space_yloc});
+	
+	</insert>
+	
+	<select id="spaceSelect" resultType="qna.project.nmj.beans.SpaceDTO">
+	SELECT * FROM NMJ_space WHERE store_uid = #{param1} ORDER BY space_uid asc;	 
+	</select>
+	
+	
+	
+	<select id="selectAllStores" resultType="qna.project.nmj.beans.StoreDTO">
+	SELECT *
+	FROM nmj_store  order by store_name ASC;
+	</select>
+
+
+	<update id="spaceEmpty">
+		UPDATE
+			NMJ_space
+		SET
+			space_empty = #{param2}
+		WHERE
+			space_uid = #{param1};
+	</update>
+	
+	<select id="reservSelect" resultType="qna.project.nmj.beans.StoreMyReviewDTO">
+		SELECT * FROM NMJ_reservation re, NMJ_member mem WHERE store_uid = #{param1} and re.mb_uid = mem.mb_uid  and re.reservation_check = 0 ORDER BY re.reservation_uid asc;
+	</select>
+
+	<select id="spaceImgSelect" resultType="qna.project.nmj.beans.StoreSpaceImgDTO">
+		SELECT * FROM NMJ_spaceimage si, NMJ_space sp WHERE sp.space_uid = si.space_uid and sp.store_uid = #{param1} ORDER BY sp.space_uid; 
+	</select>
+	<select id="spaceSelectByUid" resultType="qna.project.nmj.beans.SpaceImgDTO">
+		SELECT * FROM NMJ_spaceimage WHERE space_uid = #{param1};
+	</select>
+	
+	<insert id="spaceImageInsert">
+		INSERT INTO NMJ_spaceimage (space_uid, space_img_org, space_img_sav) VALUES(#{param1}, #{param2}, #{param3});
+	</insert>
+	
+	<delete id="spaceImageDelete">
+		DELETE FROM NMJ_spaceimage WHERE space_img_uid = #{param1};
+	</delete>
+	
+	<update id="reservationOk">
+		UPDATE nmj_reservation SET reservation_check = 1 where reservation_uid = #{param1};
+	</update>
+	
+	<update id="reservationNo">
+		UPDATE nmj_reservation SET reservation_check = 2 where reservation_uid = #{param1}; 
+	</update>
+	
+	<delete id="spaceDelete">
+		DELETE FROM nmj_space WHERE space_uid = #{param1};
+	</delete>
+</mapper>

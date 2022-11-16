@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.project.nmj.beans.dao.ReviewDAO">
+
+	<!-- 리뷰 삽입 -->
+	<insert id="insertReview" flushCache="true" parameterType="qna.project.nmj.beans.ReviewJoinDTO">
+		INSERT INTO NMJ_review (mb_uid, store_uid , review_content, review_rate)
+		VALUES (#{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
+	
+	<!-- 일반글 삽입 -->
+	<insert id="insertReview2" flushCache="true" parameterType="qna.project.nmj.beans.ReviewDTO">
+		INSERT INTO NMJ_review (mb_uid, review_content, store_uid)
+		VALUES (#{param1}, #{param2}, 0)
+	</insert>
+	
+	<!-- 댓글 삽입 -->
+	<insert id="insertReply" flushCache="true" parameterType="qna.project.nmj.beans.ReplyDTO">
+		INSERT INTO NMJ_reply (mb_uid, review_uid, reply_content, reply_level)
+		VALUES (#{param1}, #{param2}, #{param3}, 0)
+	</insert>
+	
+	<!-- 리뷰에서 평점 매김과 동시에 매장 평점 업데이트 -->
+	<update id="increaseReviewRate" flushCache="true">
+ 		 UPDATE NMJ_store SET store_ratings = store_ratings + #{param1},
+ 		 store_rateCount = store_rateCount + 1  
+ 		 WHERE store_uid = #{param2}
+ 	</update>
+	
+	<!-- 리뷰 목록 -->
+	<select id="selectAllReview" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+		SELECT a.*, b.store_type, b.store_name, c.mb_id 
+		FROM NMJ_review a 
+		JOIN NMJ_store b ON a.store_uid = b.store_uid 
+		JOIN NMJ_member c ON a.mb_uid = c.mb_uid
+		WHERE a.store_uid != 0
+		ORDER BY review_uid DESC
+	</select>
+	
+	<!-- 일반글 목록 -->
+	<select id="selectAllReview2" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+		SELECT a.*, b.mb_id 
+		FROM NMJ_review a
+		JOIN NMJ_member b ON a.mb_uid = b.mb_uid
+		WHERE store_uid = 0
+		ORDER BY review_uid DESC
+	</select>
+	
+	<!-- 리뷰 1개 불러오기 -->
+	<select id="selectReviewByUid" 
+ 		resultType="qna.project.nmj.beans.ReviewJoinDTO">
+ 		SELECT a.*, b.store_type, b.store_name, c.mb_id
+		FROM NMJ_review a 
+		JOIN NMJ_store b ON a.store_uid = b.store_uid 
+		JOIN NMJ_member c ON a.mb_uid = c.mb_uid 
+		WHERE review_uid = #{param1}
+ 	</select>
+ 	
+ 	<!-- 일반글 1개 불러오기 -->
+ 	<select id="selectReviewByUid2" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+ 		SELECT a.*, b.mb_id 
+		FROM NMJ_review a
+		JOIN NMJ_member b ON a.mb_uid = b.mb_uid
+		WHERE review_uid = #{param1}
+ 	</select>
+ 	
+	<!-- 조회수 증가 -->
+ 	<update id="increaseViewCount">
+ 		 UPDATE NMJ_review SET review_viewCount = review_viewCount + 1 
+ 		 WHERE review_uid = #{param1}
+ 	</update>
+
+	<!-- 리뷰 신고 -->
+	<insert id="reportReview" flushCache="true" parameterType="qna.project.nmj.beans.RequestDTO">
+		INSERT INTO NMJ_request (request_type, request_content)
+		VALUES (3, #{param1})
+	</insert>
+	
+	<!-- 댓글 신고 -->
+	<insert id="reportReply" flushCache="true" parameterType="qna.project.nmj.beans.RequestDTO">
+		INSERT INTO NMJ_request (request_type, request_content)
+		VALUES (4, #{param1})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="selectAllReply" resultType="qna.project.nmj.beans.ReplyJoinDTO">
+		SELECT a.*, b.mb_id 
+		FROM NMJ_reply a 
+		JOIN NMJ_member b ON a.mb_uid = b.mb_uid
+		WHERE a.review_uid = #{param1}
+		ORDER BY reply_uid DESC
+	</select>
+
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" flushCache="true" parameterType="qna.project.nmj.beans.ReviewDTO">
+		UPDATE NMJ_review SET review_content = #{review_content}, store_uid = #{store_uid}, review_rate = #{review_rate}
+		WHERE review_uid = #{review_uid}
+	</update>
+	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview2" flushCache="true" parameterType="qna.project.nmj.beans.ReviewDTO">
+		UPDATE NMJ_review SET review_content = #{review_content}
+		WHERE review_uid = #{review_uid}
+	</update>
+	
+	<delete id="deleteReview">
+		DELETE FROM NMJ_review
+		WHERE review_uid = #{review_uid}
+	</delete>
+	
+	<delete id="deleteRequest">
+		DELETE FROM NMJ_request
+		WHERE request_content = #{review_uid}
+	</delete>
+	
+	<delete id="deleteReply">
+		DELETE FROM NMJ_reply
+		WHERE reply_uid = #{reply_uid}
+	</delete>
+	
+	<select id="selectByRow" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+ 		<![CDATA[
+ 			SELECT a.*, b.store_type, b.store_name, c.mb_id 
+			FROM NMJ_review a 
+			JOIN NMJ_store b ON a.store_uid = b.store_uid 
+			JOIN NMJ_member c ON a.mb_uid = c.mb_uid
+			WHERE a.store_uid != 0
+			ORDER BY review_uid DESC
+ 			LIMIT #{fromRow}, #{writePages} 
+ 		]]>		
+	</select>
+	
+	<select id="selectByRow2" resultType="qna.project.nmj.beans.ReviewJoinDTO">
+ 		<![CDATA[
+ 			SELECT a.*, c.mb_id 
+			FROM NMJ_review a  
+			JOIN NMJ_member c ON a.mb_uid = c.mb_uid
+			WHERE a.store_uid = 0
+			ORDER BY review_uid DESC
+ 			LIMIT #{fromRow}, #{writePages} 
+ 		]]>		
+	</select>
+
+	<select id="selectAllReviewCount" resultType="int">
+		SELECT count(*) from NMJ_review WHERE store_uid != 0;
+	</select>
+	
+	<select id="selectAllReviewCount2" resultType="int">
+		SELECT count(*) from NMJ_review WHERE store_uid = 0;
+	</select>
+</mapper>
