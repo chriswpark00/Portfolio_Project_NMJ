@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin Page</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template / Admin 페이지 전반적인 레이아웃 css -->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page / 테이블에 관한 css-->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sideㄴbar-brand d-flex align-items-center justify-content-center" href="user_user.html">
+      
+            <img src="img/logo2.png" style="width: 100px; margin-top: 30px;">
+      </a>
+
+      <!-- Nav Item -->
+      <li class="nav-item">
+        <a class="nav-link" href="user_user.html"> 
+          <i class="fas fa-fw fa-cog"></i>
+          <span>손님회원관리</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="market_user.html"> 
+          <i class="fas fa-fw fa-cog"></i>
+          <span>매장회원관리</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="community.html"> 
+          <i class="fas fa-fw fa-cog"></i>
+          <span>커뮤니티관리</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="customer_service.html"> 
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Customer Service</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800" style="margin-top: 30px; margin-bottom: 30px; font-size: 1.5em;">Customer Service</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <!--<th>No</th> -->
+                      <th>No.</th>
+                      <th>요청내용</th>
+                      <th>이름</th>
+                      <th>아이디</th>
+                      <th>요청일</th>
+                      <th>해결여부</th>
+                      <th>링크</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>게시글 신고</td>
+                      <td>가나다</td>
+                      <td>g2g2</td>
+                      <td>2020/01/03</td>
+                      <td>넘기기 | 해결</td>
+                      <td>이동(버튼)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>댓글 신고</td>
+                        <td>하하하</td>
+                        <td>ㅋㄷㅋㄷ</td>
+                        <td>2020/02/03</td>
+                        <td>넘기기 | 해결</td>
+                        <td>이동(버튼)</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>매장등록 요청</td>
+                        <td>커피사줘</td>
+                        <td>byebye</td>
+                        <td>2020/02/03</td>
+                        <td>넘기기 | 해결</td>
+                        <td>이동(버튼)</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>매장수정 요청</td>
+                          <td>갓코이이</td>
+                          <td>곤니치와</td>
+                          <td>2020/02/04</td>
+                          <td>넘기기 | 해결</td>
+                          <td>이동(버튼)</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>게시글 신고</td>
+                            <td>가나다</td>
+                            <td>g2g2</td>
+                            <td>2020/01/03</td>
+                            <td>넘기기 | 해결</td>
+                            <td>이동(버튼)</td>
+                          </tr>
+                          <tr>
+                              <td>2</td>
+                              <td>댓글 신고</td>
+                              <td>하하하</td>
+                              <td>ㅋㄷㅋㄷ</td>
+                              <td>2020/02/03</td>
+                              <td>넘기기 | 해결</td>
+                              <td>이동(버튼)</td>
+                            </tr>
+                            <tr>
+                              <td>3</td>
+                              <td>매장등록 요청</td>
+                              <td>커피사줘</td>
+                              <td>byebye</td>
+                              <td>2020/02/03</td>
+                              <td>넘기기 | 해결</td>
+                              <td>이동(버튼)</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>매장수정 요청</td>
+                                <td>갓코이이</td>
+                                <td>곤니치와</td>
+                                <td>2020/02/04</td>
+                                <td>넘기기 | 해결</td>
+                                <td>이동(버튼)</td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>게시글 신고</td>
+                                <td>가나다</td>
+                                <td>g2g2</td>
+                                <td>2020/01/03</td>
+                                <td>넘기기 | 해결</td>
+                                <td>이동(버튼)</td>
+                              </tr>
+                              <tr>
+                                  <td>2</td>
+                                  <td>댓글 신고</td>
+                                  <td>하하하</td>
+                                  <td>ㅋㄷㅋㄷ</td>
+                                  <td>2020/02/03</td>
+                                  <td>넘기기 | 해결</td>
+                                  <td>이동(버튼)</td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>매장등록 요청</td>
+                                  <td>커피사줘</td>
+                                  <td>byebye</td>
+                                  <td>2020/02/03</td>
+                                  <td>넘기기 | 해결</td>
+                                  <td>이동(버튼)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>매장수정 요청</td>
+                                    <td>갓코이이</td>
+                                    <td>곤니치와</td>
+                                    <td>2020/02/04</td>
+                                    <td>넘기기 | 해결</td>
+                                    <td>이동(버튼)</td>
+                                  </tr>   
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Let's Play, Eat and Sleep 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
